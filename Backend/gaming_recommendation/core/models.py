@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Game(models.Model):
     title = models.CharField(max_length=200)
@@ -31,8 +32,8 @@ class UserGameInteraction(models.Model):
         ('played', 'Played'),
     }
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    game = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='game_interactions')
+    game = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user_interactions' )
     interaction_type = models.CharField(max_length=10, choices=INTERACTION_CHOICES)
     interation_date = models.DateTimeField(auto_now_add=True)
 
